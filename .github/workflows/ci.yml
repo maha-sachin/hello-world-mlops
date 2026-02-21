@@ -2,42 +2,105 @@ name: CI - Train and Save the model
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
-
+    branches:
+      - main
 jobs:
-  matrix-pip:
-    name: Train and Save the model
-    runs-on: ubuntu-latest
+  matrix-py:
+    name: Train and save the model
+    runs-on: ubuntu-latest #github runner this is public 
     strategy:
       matrix:
         python: [3.11, 3.12]
-    
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-      
-      - name: Setup python 
-        uses: actions/setup-python@v4
+        uses: actions/checkout@v5
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-           python-version: ${{ matrix.python }}
-      
+          python-version: {{ matrix.python}}
       - name: Upgrade pip
         run: python -m pip install --upgrade pip setuptools wheel
 
-      - name: Install project dependencies
-        run: python -m pip install -r requirements.txt
+      -name
+        
 
-      - name: Train the model
-        run: |
-           python train.py
-           ls -la artifacts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# name: CI - Train and Save the model
+
+# on:
+#   push:
+#     branches: [ main ]
+#   pull_request:
+#     branches: [ main ]
+
+# jobs:
+#   matrix-pip:
+#     name: Train and Save the model
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         python: [3.11, 3.12]
+    
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v4
       
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: ml-artifacts-${{ matrix.python }}-${{ github.run_id }}
-          path: artifacts
+#       - name: Setup python 
+#         uses: actions/setup-python@v4
+#         with:
+#            python-version: ${{ matrix.python }}
+      
+#       - name: Upgrade pip
+#         run: python -m pip install --upgrade pip setuptools wheel
+
+#       - name: Install project dependencies
+#         run: python -m pip install -r requirements.txt
+
+#       - name: Train the model
+#         run: |
+#            python train.py
+#            ls -la artifacts
+      
+#       - name: Upload artifacts
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: ml-artifacts-${{ matrix.python }}-${{ github.run_id }}
+#           path: artifacts
 
 
